@@ -2,15 +2,22 @@
 
 namespace Wenprise\SessionManager;
 
+use Wenprise\SessionManager\Handlers\CacheHandler;
 use Wenprise\SessionManager\Handlers\DatabaseHandler;
 
 class Init {
 
-	public function __construct() {
+	public function __construct($force_db_handler = false) {
 		if ( ! isset( $_SESSION ) ) {
 			// Queue up the session stack.
 			$wp_session_handler = Manager::initialize();
-			$wp_session_handler->addHandler( new DatabaseHandler() );
+
+			// 如果使用了对象缓存，设置对象缓存为 Handler
+			if ( wp_using_ext_object_cache() && ! $force_db_handler ) {
+				$wp_session_handler->addHandler( new CacheHandler() );
+			} else {
+				$wp_session_handler->addHandler( new DatabaseHandler() );
+			}
 
 			/**
 			 * The database handler can automatically clean up sessions as it goes. By default,
