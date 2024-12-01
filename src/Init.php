@@ -35,6 +35,9 @@ class Init {
 
 			add_action( 'wenprise_session_database_gc', [ 'EAMann\WPSession\DatabaseHandler', 'directClean' ] );
 
+			// 创建数据表
+			DatabaseHandler::directClean();
+
 			$_SESSION[ 'wenprise_session_manager' ] = 'active';
 		}
 
