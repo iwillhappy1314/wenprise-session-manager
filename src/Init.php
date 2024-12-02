@@ -33,7 +33,7 @@ class Init {
 				wp_schedule_event( time(), $timeout, 'wenprise_session_database_gc' );
 			}
 
-			add_action( 'wenprise_session_database_gc', [ 'EAMann\WPSession\DatabaseHandler', 'directClean' ] );
+			add_action( 'wenprise_session_database_gc', [ '\Wenprise\SessionManager\Handlers\DatabaseHandler', 'directClean' ] );
 
 			// 创建数据表
 			DatabaseHandler::createTable();
