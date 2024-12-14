@@ -3,7 +3,7 @@
 ### 初始化
 ```php
 add_action('plugins_loaded', fucntion(){
-   new \WenpriseSecurity\Deps\Wenprise\SessionManager\Init();
+   new \Wenprise\SessionManager\Init();
 });
 
 ```
